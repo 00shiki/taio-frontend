@@ -217,19 +217,12 @@ fun PageThree(
     page: MutableState<Int>,
     focusManager: FocusManager
 ){
-    Column{
+    Column (verticalArrangement = Arrangement.SpaceBetween){
         SignatureGuide()
         SignatureCanvas()
         SignatureGuide2()
-        ButtonFooter(
-            label = "Simpan",
-            onButtonClick = {
-                page.value = 2
-            }
-        )
-        ButtonFooterWhite(
-            label = "Kembali",
-            onButtonClick = {page.value = 2})
+        Spacer(modifier = Modifier.size(80.dp))
+        ButtonGroupFooter {}
     }
 }
 
@@ -348,6 +341,7 @@ fun LargeTextField(
 
     )
 }
+
 @Composable
 fun SignatureGuide(){
     Column(modifier = Modifier
@@ -402,7 +396,7 @@ fun SignatureCanvas(){
 fun RowScope.MenuItems(
     @DrawableRes resId: Int,
     desc: String,
-    colorTint: androidx.compose.ui.graphics.Color,
+    colorTint: Color,
     border: Boolean = false,
     onClick: () -> Unit
 ) {
@@ -470,7 +464,6 @@ fun SignatureGuide2(){
         modifier = Modifier.padding(10.dp))
 }
 
-
 @Composable
 fun ButtonFooterWhite(
     label: String,
@@ -491,13 +484,13 @@ fun ButtonFooterWhite(
 }
 
 @Composable
-fun ButtonGroupFooter(){
+fun ButtonGroupFooter(
+    onDownloadClick: () -> Unit
+){
+    val drawController = rememberDrawController()
     Column(modifier=Modifier.padding(16.dp)) {
-        ButtonFooter(label = "Simpan"){}
+        ButtonFooter(label = "Simpan", onButtonClick = {drawController.getDrawBoxBitmap()})
         Spacer(modifier = Modifier.size(10.dp))
-        ButtonFooterWhite(label = "Kembali") {}
+        ButtonFooterWhite(label = "Kembali"){}
     }
 }
-
-
-
