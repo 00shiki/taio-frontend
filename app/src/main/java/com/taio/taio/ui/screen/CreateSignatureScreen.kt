@@ -6,6 +6,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -13,6 +14,7 @@ import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
@@ -32,7 +34,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.taio.taio.R
 import com.taio.taio.data.CreateState
+import com.taio.taio.ui.theme.Gray500
 import com.taio.taio.ui.theme.Green200
+import com.taio.taio.ui.theme.Green500
+import com.taio.taio.ui.theme.Typography
 import com.taio.taio.viewmodel.CreateSignatureViewModel
 import io.ak1.drawbox.DrawBox
 import io.ak1.drawbox.DrawController
@@ -210,10 +215,101 @@ fun PageTwo(
         .verticalScroll(rememberScrollState())
         .padding(16.dp)
         .padding(top = 10.dp)) {
+
+        Text(
+            text = "Dokumen Preview",
+            fontSize = 15.sp,
+            color = Color.Black
+        )
+
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .height(120.dp)
+            .border(2.dp, Green500, RoundedCornerShape(10.dp))) {
+            Button(
+                modifier = Modifier.padding(start = 84.dp, top = 32.dp),
+                colors = ButtonDefaults.buttonColors(Green500),
+                onClick = { /*TODO*/ }
+            ) {
+                Text(text = "Upload Dokumen")
+            }
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+        
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(
+                painter = painterResource(id = R.drawable.generated_count),
+                contentDescription = null,
+                tint = Green500,
+                modifier = Modifier.padding(end = 15.dp)
+            )
+            Text(
+                text = "Live Signature",
+                fontSize = 15.sp,
+                color = Color.Black
+            )
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(
+                text = "Apakah anda ingin menggunkan live signature ?",
+                style = Typography.body1,
+                color = Gray500
+            )
+            Row(
+                modifier = Modifier.padding(start = 130.dp, top = 10.dp, bottom = 10.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = Modifier
+                        .clickable {page.value = 3}
+                        .padding(end = 10.dp),
+                    text = "Iya",
+                    fontSize = 15.sp,
+                    color = Green500
+                )
+                Text(
+                    modifier = Modifier.clickable { },
+                    text = "Tidak",
+                    fontSize = 15.sp,
+                    color = Gray500
+                )
+            }
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+        
+        Text(
+            text = "Signature Preview",
+            fontSize = 15.sp,
+            color = Color.Black
+        )
+        Text(
+            text = "Signature preview akan terlihat jika anda melakukan live signature",
+            style = Typography.body1,
+            color = Gray500
+        )
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp)
+            .height(220.dp)
+            .border(2.dp, Green500, RoundedCornerShape(10.dp))) {
+            Text(
+                modifier = Modifier.padding(start = 50.dp, top = 80.dp),
+                text = "Nanti Taruh Image Disini Ya Ky",
+                fontSize = 15.sp
+            )
+        }
+        Spacer(modifier = Modifier.size(16.dp))
+
         ButtonFooter(
-            label = "Selanjutnya",
+            label = "Simpan",
             onButtonClick = {
-                page.value = 3
             }
         )
         ButtonFooterWhite(
