@@ -28,7 +28,6 @@ import com.taio.taio.domain.model.UserRequest
 import com.taio.taio.domain.model.UserRequested
 import com.taio.taio.ui.TandatanganioScreen
 import com.taio.taio.ui.theme.*
-import com.taio.taio.viewmodel.SplashViewModel
 
 @Composable
 fun HomeScreen(

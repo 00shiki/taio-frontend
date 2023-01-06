@@ -12,9 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.compose.rememberNavController
 import com.taio.taio.ui.TandatanganioApp
 import com.taio.taio.ui.TandatanganioScreen
-import com.taio.taio.ui.screen.SplashScreen
 import com.taio.taio.ui.theme.TandatanganioMobileTheme
-import com.taio.taio.viewmodel.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -16,10 +16,8 @@ object ApiModule {
     @Provides
     fun provideApiService(): ApiService {
         return Retrofit.Builder()
-            .baseUrl("https://localhost:8000/")
+            .baseUrl("https://localhost:8000/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .build().create(ApiService::class.java)
     }
-
-
 }

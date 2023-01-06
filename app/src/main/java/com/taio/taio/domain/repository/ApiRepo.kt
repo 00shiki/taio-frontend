@@ -5,5 +5,5 @@ import retrofit2.Call
 
 interface ApiRepo {
     suspend fun login(email: String, password: String): Call<ResponseBody>
-    suspend fun register(name: String, email: String, password: String): Call<ResponseBody>
+    suspend fun register(name: String, email: String, userId: String, phoneNumber: String, password: String): Call<ResponseBody>
 }

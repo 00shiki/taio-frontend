@@ -35,7 +35,6 @@ import com.taio.taio.ui.TandatanganioScreen
 import com.taio.taio.ui.theme.Gray700
 import com.taio.taio.ui.theme.Green500
 import com.taio.taio.ui.theme.Typography
-import com.taio.taio.viewmodel.SplashViewModel
 import kotlinx.coroutines.launch
 
 sealed class LandingPage(

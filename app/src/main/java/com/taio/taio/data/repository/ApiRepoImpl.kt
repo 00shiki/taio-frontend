@@ -14,8 +14,8 @@ class ApiRepoImpl @Inject constructor(private val apiService: ApiService) : ApiR
         return apiService.login(loginRequest)
     }
 
-    override suspend fun register(name: String, email: String, password: String): Call<ResponseBody> {
-        val registrationRequest = RegisterRequest(name, email, password)
+    override suspend fun register(name: String, email: String, userId: String, phoneNumber: String, password: String): Call<ResponseBody> {
+        val registrationRequest = RegisterRequest(name, email, userId, phoneNumber, password)
         return apiService.register(registrationRequest)
     }
 
