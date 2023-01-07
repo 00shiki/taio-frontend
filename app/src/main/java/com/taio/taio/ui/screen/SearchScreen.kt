@@ -34,7 +34,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.taio.taio.R
 import com.taio.taio.data.DataSource
-import com.taio.taio.domain.model.SiganatureList
+import com.taio.taio.domain.model.SignatureList
 import com.taio.taio.domain.model.User
 import com.taio.taio.domain.model.UserRequested
 import com.taio.taio.ui.TandatanganioScreen
