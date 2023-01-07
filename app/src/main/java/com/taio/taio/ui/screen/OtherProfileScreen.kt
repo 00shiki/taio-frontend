@@ -1,6 +1,5 @@
 package com.taio.taio.ui.screen
 
-import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -9,7 +8,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -33,9 +31,12 @@ import com.taio.taio.viewmodel.SearchViewModel
 @Composable
 fun OtherProfileScreen(
     user: User,
-    userSocial: UserSocial,
-    selfSignature: SelfSignature,
-    requestedSignature: RequestedSignature,
+    userSocial: UserSocial = UserSocial(),
+    selfSignature: SelfSignature = SelfSignature(),
+    requestedSignature: RequestedSignature = RequestedSignature(),
+//    userSocial: UserSocial,
+//    selfSignature: SelfSignature,
+//    requestedSignature: RequestedSignature,
     navController: NavHostController,
     searchViewModel: SearchViewModel = viewModel()
 ){
