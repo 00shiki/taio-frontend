@@ -95,6 +95,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .weight(1f)
                     .border(BorderStroke(1.dp, Color.LightGray))
+                    .padding(10.dp)
             ) {
                 Text(
                     text = user.follower.size.toString(),
@@ -122,6 +123,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .weight(1f)
                     .border(BorderStroke(1.dp, Color.LightGray))
+                    .padding(20.dp)
             ) {
                 Text(
                     text = user.following.size.toString(),

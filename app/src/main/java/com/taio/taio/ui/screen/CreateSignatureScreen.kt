@@ -1,5 +1,6 @@
 package com.taio.taio.ui.screen
 
+import android.graphics.Bitmap
 import androidx.compose.runtime.Composable
 import androidx.activity.compose.BackHandler
 import androidx.annotation.DrawableRes
@@ -10,7 +11,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
@@ -21,15 +21,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.painter.BitmapPainter
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.graphics.createBitmap
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.taio.taio.R
@@ -83,7 +87,7 @@ fun CreateSignatureScreen(navController: NavController, viewModel: CreateSignatu
                 viewModel = viewModel,
                 createState = createState,
                 page = page,
-                focusManager = focusManager,
+                focusManager = focusManager
             )
             2 -> PageTwo(
                 viewModel = viewModel,
@@ -95,7 +99,7 @@ fun CreateSignatureScreen(navController: NavController, viewModel: CreateSignatu
                 viewModel = viewModel,
                 createState = createState,
                 page = page,
-                focusManager = focusManager,
+                focusManager = focusManager
             )
         }
     }
@@ -209,7 +213,7 @@ fun PageTwo(
     viewModel: CreateSignatureViewModel,
     createState: CreateState,
     page: MutableState<Int>,
-    focusManager: FocusManager
+    focusManager: FocusManager,
 ){
     Column(modifier = Modifier
         .verticalScroll(rememberScrollState())
@@ -236,7 +240,7 @@ fun PageTwo(
             }
         }
         Spacer(modifier = Modifier.size(16.dp))
-        
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -268,7 +272,7 @@ fun PageTwo(
             ) {
                 Text(
                     modifier = Modifier
-                        .clickable {page.value = 3}
+                        .clickable { page.value = 3 }
                         .padding(end = 10.dp),
                     text = "Iya",
                     fontSize = 15.sp,
@@ -283,7 +287,7 @@ fun PageTwo(
             }
         }
         Spacer(modifier = Modifier.size(16.dp))
-        
+
         Text(
             text = "Signature Preview",
             fontSize = 15.sp,
@@ -299,11 +303,8 @@ fun PageTwo(
             .padding(16.dp)
             .height(220.dp)
             .border(2.dp, Green500, RoundedCornerShape(10.dp))) {
-            Text(
-                modifier = Modifier.padding(start = 50.dp, top = 80.dp),
-                text = "Nanti Taruh Image Disini Ya Ky",
-                fontSize = 15.sp
-            )
+            //disini
+
         }
         Spacer(modifier = Modifier.size(16.dp))
 
@@ -318,6 +319,7 @@ fun PageTwo(
     }
 }
 
+
 @Composable
 fun PageThree(
     viewModel: CreateSignatureViewModel,
@@ -325,12 +327,16 @@ fun PageThree(
     page: MutableState<Int>,
     focusManager: FocusManager
 ){
+    val undoVisibility = remember {mutableStateOf(false)}
+    val redoVisibility = remember {mutableStateOf(false)}
+    val drawController = rememberDrawController()
+
     Column (verticalArrangement = Arrangement.SpaceBetween){
         SignatureGuide()
-        SignatureCanvas()
+        SignatureCanvas(undoVisibility, redoVisibility, drawController)
         SignatureGuide2()
         Spacer(modifier = Modifier.size(80.dp))
-        ButtonGroupFooter {}
+        ButtonGroupFooter()
     }
 }
 
@@ -474,15 +480,16 @@ fun SignatureGuide(){
 }
 
 @Composable
-fun SignatureCanvas(){
-    val undoVisibility = remember {mutableStateOf(false)}
-    val redoVisibility = remember {mutableStateOf(false)}
-    val drawController = rememberDrawController()
+fun SignatureCanvas(
+    undoVisibility: MutableState<Boolean>,
+    redoVisibility: MutableState<Boolean>,
+    drawController: DrawController
+    ){
 
     Column(modifier = Modifier
         .padding(16.dp)
         .height(295.dp)
-        .border(2.dp, Green200)) {
+        .border(2.dp, Green500, RoundedCornerShape(10.dp))) {
         drawController.setStrokeColor(Black)
         DrawBox(drawController = drawController,
             modifier = Modifier
@@ -592,13 +599,15 @@ fun ButtonFooterWhite(
 }
 
 @Composable
-fun ButtonGroupFooter(
-    onDownloadClick: () -> Unit
-){
+fun ButtonGroupFooter(){
     val drawController = rememberDrawController()
     Column(modifier=Modifier.padding(16.dp)) {
-        ButtonFooter(label = "Simpan", onButtonClick = {drawController.getDrawBoxBitmap()})
+        ButtonFooter(label = "Simpan", onButtonClick = {
+             drawController.getDrawBoxBitmap()
+        })
         Spacer(modifier = Modifier.size(10.dp))
         ButtonFooterWhite(label = "Kembali"){}
     }
 }
+
+

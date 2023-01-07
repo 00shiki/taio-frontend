@@ -1,5 +1,6 @@
 package com.taio.taio.viewmodel
 
+import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
 import com.taio.taio.data.CreateState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,4 +32,9 @@ class CreateSignatureViewModel: ViewModel() {
         return (createState.value.documentName.isNotEmpty() && createState.value.documentDate.isNotEmpty()
                 && createState.value.documentDescription.isNotEmpty())
     }
+
+    fun onImage(signature: Bitmap?){
+        createState.value = createState.value.copy(signature = signature)
+    }
+
 }
