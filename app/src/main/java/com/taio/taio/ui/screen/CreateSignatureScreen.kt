@@ -3,48 +3,36 @@ package com.taio.taio.ui.screen
 import androidx.compose.runtime.Composable
 import androidx.activity.compose.BackHandler
 import android.app.DatePickerDialog
+import android.widget.DatePicker
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
-import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.taio.taio.R
 import com.taio.taio.data.CreateState
-import com.taio.taio.ui.theme.Gray500
-import com.taio.taio.ui.theme.Green200
 import com.taio.taio.ui.theme.Green500
-import com.taio.taio.ui.theme.Typography
 import com.taio.taio.viewmodel.CreateSignatureViewModel
-import io.ak1.drawbox.DrawBox
-import io.ak1.drawbox.DrawController
-import io.ak1.drawbox.rememberDrawController
-import java.util.Calendar
+import java.util.*
 
 @Composable
 fun CreateSignatureScreen(navController: NavController, viewModel: CreateSignatureViewModel = viewModel()){
@@ -60,6 +48,34 @@ fun CreateSignatureScreen(navController: NavController, viewModel: CreateSignatu
             page.value = page.value - 1
         }
     }
+
+    // Fetching the Local Context
+    val mContext = LocalContext.current
+
+    // Declaring integer values
+    // for year, month and day
+    val mYear: Int
+    val mMonth: Int
+    val mDay: Int
+
+    // Initializing a Calendar
+    val mCalendar = Calendar.getInstance()
+
+    // Fetching current year, month and day
+    mYear = mCalendar.get(Calendar.YEAR)
+    mMonth = mCalendar.get(Calendar.MONTH)
+    mDay = mCalendar.get(Calendar.DAY_OF_MONTH)
+
+    mCalendar.time = Date()
+
+    // Declaring DatePickerDialog and setting
+    // initial values as current values (present year, month and day)
+    val mDatePickerDialog = DatePickerDialog(
+        mContext,
+        { _: DatePicker, mYear: Int, mMonth: Int, mDayOfMonth: Int ->
+            viewModel.onDocDate("$mYear/${mMonth+1}/$mDayOfMonth")
+        }, mYear, mMonth, mDay
+    )
 
     Scaffold(
         modifier = Modifier
@@ -87,6 +103,7 @@ fun CreateSignatureScreen(navController: NavController, viewModel: CreateSignatu
                 createState = createState,
                 page = page,
                 focusManager = focusManager,
+                datePickerDialog = mDatePickerDialog,
             )
             2 -> PageTwo(
                 viewModel = viewModel,
@@ -104,7 +121,8 @@ fun PageOne(
     viewModel: CreateSignatureViewModel,
     createState: CreateState,
     page: MutableState<Int>,
-    focusManager: FocusManager
+    focusManager: FocusManager,
+    datePickerDialog: DatePickerDialog,
 ){
     Column(
         modifier = Modifier
@@ -137,7 +155,7 @@ fun PageOne(
             label = "Tanggal Dokumen",
             text = createState.documentDate,
             onValueChange = {documentDate -> viewModel.onDocDate(documentDate)},
-            onViewClick = { /*TODO*/ },
+            onViewClick = { datePickerDialog.show() },
             isError = {error -> viewModel.isFormError(error)},
             errorState = createState.isFormError,
             placeholder = "Tanggal(yyyy/mm/dd)",
