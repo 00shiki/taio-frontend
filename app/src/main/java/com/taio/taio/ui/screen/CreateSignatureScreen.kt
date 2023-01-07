@@ -2,7 +2,7 @@ package com.taio.taio.ui.screen
 
 import androidx.compose.runtime.Composable
 import androidx.activity.compose.BackHandler
-import androidx.annotation.DrawableRes
+import android.app.DatePickerDialog
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -21,8 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Gray
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
@@ -42,6 +44,7 @@ import com.taio.taio.viewmodel.CreateSignatureViewModel
 import io.ak1.drawbox.DrawBox
 import io.ak1.drawbox.DrawController
 import io.ak1.drawbox.rememberDrawController
+import java.util.Calendar
 
 @Composable
 fun CreateSignatureScreen(navController: NavController, viewModel: CreateSignatureViewModel = viewModel()){
@@ -130,13 +133,14 @@ fun PageOne(
         )
         Spacer(modifier = Modifier.size(16.dp))
 
-        SmallTextField(
-            label = "Tanggal Dokumen*",
-            placeholder = "Tanggal(yyyy/mm/dd)",
+        DateField(
+            label = "Tanggal Dokumen",
             text = createState.documentDate,
             onValueChange = {documentDate -> viewModel.onDocDate(documentDate)},
+            onViewClick = { /*TODO*/ },
             isError = {error -> viewModel.isFormError(error)},
             errorState = createState.isFormError,
+            placeholder = "Tanggal(yyyy/mm/dd)",
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done
             ),
@@ -307,6 +311,65 @@ fun SmallTextField(
             focusedBorderColor = Color(0xFF27A74A)
         )
 
+    )
+}
+
+/*Fun Field Date*/
+@Composable
+fun DateField(
+    label: String,
+    text: String,
+    enabled: Boolean = true,
+    onValueChange: (String) -> Unit,
+    onViewClick: () -> Unit,
+    isError: (Boolean) -> Unit,
+    errorState: Boolean,
+    placeholder: String,
+    keyboardOptions: KeyboardOptions,
+    keyboardActions: KeyboardActions
+){
+    Text(
+        text = label,
+        fontSize = 15.sp,
+        color = Color.Black,
+        modifier = Modifier.padding(bottom = 10.dp)
+    )
+    OutlinedTextField(
+        modifier = Modifier
+            .fillMaxSize()
+            .height(50.dp),
+        value = text,
+        enabled = enabled,
+        placeholder = {
+            Text(
+                text = placeholder,
+                fontSize = 14.sp
+            )
+        },
+        onValueChange = {
+            if (errorState) {
+                isError(false)
+            }
+            onValueChange(it)
+        },
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            unfocusedBorderColor = if (errorState) Color(0xFFDC0404) else Color(0xFFC5C5C5),
+            focusedBorderColor = Color(0xFF27A74A)
+        ),
+        trailingIcon = {
+            IconButton(onClick = {
+                onViewClick()
+            }) {
+                Icon(
+                    painter = painterResource(R.drawable.calendar),
+                    contentDescription = stringResource(R.string.content_description_visibility),
+                    tint = Green500,
+                    modifier = Modifier.size(24.dp)
+                )
+            }
+        }
     )
 }
 
