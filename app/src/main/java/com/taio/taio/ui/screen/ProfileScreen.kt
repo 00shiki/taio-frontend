@@ -14,10 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.taio.taio.R
 import com.taio.taio.domain.model.RequestedSignature
 import com.taio.taio.domain.model.SelfSignature
@@ -25,15 +23,17 @@ import com.taio.taio.domain.model.User
 import com.taio.taio.domain.model.UserSocial
 import com.taio.taio.ui.TandatanganioScreen
 import com.taio.taio.ui.theme.Gray700
-import com.taio.taio.ui.theme.TandatanganioMobileTheme
 import com.taio.taio.ui.theme.Typography
 
 @Composable
 fun ProfileScreen(
     user: User,
-    userSocial: UserSocial,
-    selfSignature: SelfSignature,
-    requestedSignature: RequestedSignature,
+    userSocial: UserSocial = UserSocial(),
+    selfSignature: SelfSignature = SelfSignature(),
+    requestedSignature: RequestedSignature = RequestedSignature(),
+//    userSocial: UserSocial,
+//    selfSignature: SelfSignature,
+//    requestedSignature: RequestedSignature,
     navController: NavHostController
 ) {
     Column(
