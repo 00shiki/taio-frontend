@@ -1,10 +1,16 @@
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.foundation.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -15,18 +21,22 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.taio.taio.R
 import com.taio.taio.domain.model.User
 import com.taio.taio.ui.TandatanganioScreen
+import com.taio.taio.ui.theme.Green500
 import com.taio.taio.ui.theme.Typography
 
 @Composable
 fun EditProfileScreen(user: User, navController: NavHostController,) {
     BoxWithConstraints(modifier = Modifier
         .fillMaxSize()
+        .verticalScroll(rememberScrollState())
         .background(color = White)
     ) {
 //        val editProfileState: editProfileState = viewModel.editProfileState.collectAsState().value
@@ -44,17 +54,44 @@ fun EditProfileScreen(user: User, navController: NavHostController,) {
             // Profile Image, User Name, Email & Phone
             Column( modifier = Modifier
                 .fillMaxWidth()
-                .height(190.dp),
+                .height(200.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(
-                    modifier = Modifier
-                        .size(125.dp)
-                        .clip(CircleShape),
-                    painter = painterResource(id = user.avatar),
-                    contentDescription = "Logo User",
-                )
+                Box(modifier = Modifier
+                    .width(135.dp)
+                    .height(135.dp)
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .size(125.dp)
+                            .clip(CircleShape)
+                            .align(Alignment.Center),
+                        painter = painterResource(id = user.avatar),
+                        contentDescription = "Logo User",
+                    )
+                    Box(modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                    ) {
+                        Button(modifier = Modifier
+                            .size(50.dp),
+                            shape = CircleShape,
+                            colors = ButtonDefaults.outlinedButtonColors(
+                                backgroundColor = Green500,
+                                contentColor = White),
+                            onClick = { /*TODO*/ }
+                        ) {}
+                        Image(
+                            modifier = Modifier
+                                .size(33.dp)
+                                .align(Alignment.Center)
+                                .padding(bottom = 3.dp),
+                            painter = painterResource(id = R.drawable.camera),
+                            contentDescription = "Pick Image",
+                        )
+                    }
+                }
+
                 Text(
                     text = user.name,
                     style = Typography.h3
@@ -139,7 +176,8 @@ fun EditProfileScreen(user: User, navController: NavHostController,) {
                         )
 
                         OutlinedTextField(
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier
+                                .fillMaxWidth()
                                 .height(125.dp),
                             shape = RoundedCornerShape(5.dp),
                             maxLines = 5,
@@ -170,9 +208,10 @@ fun EditProfileScreen(user: User, navController: NavHostController,) {
 }
 
 
-//@Preview
-//@Composable
-//fun EditProfileScreenPreview() {
-//    val mockuser = User(R.drawable.avatar, "Asep Konco")
-//    EditProfileScreen(mockuser)
-//}
+@Preview
+@Composable
+fun EditProfileScreenPreview() {
+    val navController = rememberNavController()
+    val mockuser = User(R.drawable.avatar, 1, "Asep Konco")
+    EditProfileScreen(mockuser, navController)
+}
