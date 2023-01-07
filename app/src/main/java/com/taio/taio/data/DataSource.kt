@@ -1,11 +1,7 @@
 package com.taio.taio.data
 
 import com.taio.taio.R
-import com.taio.taio.domain.model.SiganatureList
-import com.taio.taio.domain.model.User
-import com.taio.taio.domain.model.UserRequest
-import com.taio.taio.domain.model.UserRequested
-import java.security.Signature
+import com.taio.taio.domain.model.*
 
 class DataSource() {
     fun loadUser(): List<User>{
@@ -17,45 +13,6 @@ class DataSource() {
                 "adnonef",
                 "Bani@gmail.com",
                 "2342325",
-                "Bani123",
-                listOf(
-                    User(R.drawable.avatar, name = "Ahmad Bani Faqih"),
-                    User(R.drawable.avatar, name = "Riszky Hermawan")
-                ),
-                listOf(
-                    User(R.drawable.avatar, name = "Ahmad Luhur Pakerti"),
-                    User(R.drawable.avatar, name = "Ridwan Effendy")
-                ),
-                listOf(
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        requested = true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        requested = true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        requested = true
-                    ),
-                )
             ),
             User(
                 R.drawable.avatar,
@@ -64,45 +21,6 @@ class DataSource() {
                 "rizkyjr",
                 "Rizky@gmail.com",
                 "2342325",
-                "Rizky123",
-                listOf(
-                    User(R.drawable.avatar, name = "Ahmad Bani Faqih"),
-                    User(R.drawable.avatar, name = "Riszky Hermawan")
-                ),
-                listOf(
-                    User(R.drawable.avatar, name = "Ahmad Luhur Pakerti"),
-                    User(R.drawable.avatar, name = "Ridwan Effendy")
-                ),
-                listOf(
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        requested = true
-                    ),
-                )
             ),
             User(
                 R.drawable.avatar,
@@ -110,8 +28,15 @@ class DataSource() {
                 "Ridwan Effendy",
                 "Ridwanrr",
                 "Ridwan@gmail.com",
-                "2342325",
-                "Ridwan123",
+                "2342325"
+            ),
+        )
+    }
+
+    fun loadUserSocial(): List<UserSocial> {
+        return listOf<UserSocial> (
+            // 1
+            UserSocial (
                 listOf(
                     User(R.drawable.avatar, name = "Ahmad Bani Faqih"),
                     User(R.drawable.avatar, name = "Riszky Hermawan")
@@ -119,40 +44,138 @@ class DataSource() {
                 listOf(
                     User(R.drawable.avatar, name = "Ahmad Luhur Pakerti"),
                     User(R.drawable.avatar, name = "Ridwan Effendy")
-                ),
-                listOf(
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        requested = true
-                    ),
-                    SiganatureList(
-                        "Test Aja",
-                        "31/12/2022",
-                        "12345678",
-                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
-                        requested = true
-                    ),
                 )
             ),
         )
+//            // 2
+//            UserSocial (
+//                listOf(
+//                    User(R.drawable.avatar, name = "Ahmad Bani Faqih"),
+//                    User(R.drawable.avatar, name = "Riszky Hermawan")
+//                ),
+//                listOf(
+//                    User(R.drawable.avatar, name = "Ahmad Luhur Pakerti"),
+//                    User(R.drawable.avatar, name = "Ridwan Effendy")
+//                )
+//            ),
+//            // 3
+//            UserSocial (
+//                listOf(
+//                    User(R.drawable.avatar, name = "Ahmad Bani Faqih"),
+//                    User(R.drawable.avatar, name = "Riszky Hermawan")
+//                ),
+//                listOf(
+//                    User(R.drawable.avatar, name = "Ahmad Luhur Pakerti"),
+//                    User(R.drawable.avatar, name = "Ridwan Effendy")
+//                )
+//            ),
+//        )
     }
+
+    fun loadSelfSignature(): List<SelfSignature> {
+        return listOf<SelfSignature> (
+            //1
+            SelfSignature (
+                listOf(
+                    SignatureList(
+                        "Test Aja",
+                        "31/12/2022",
+                        "12345678",
+                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+                        true
+                    ),
+                    SignatureList(
+                        "Test Aja",
+                        "31/12/2022",
+                        "12345678",
+                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+                        requested = true
+                    ),
+                    SignatureList(
+                        "Test Aja",
+                        "31/12/2022",
+                        "12345678",
+                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+                        requested = true
+                    ),
+                    SignatureList(
+                        "Test Aja",
+                        "31/12/2022",
+                        "12345678",
+                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+                        requested = true
+                    )
+                )
+            ),
+//            // 2
+//            SelfSignature (
+//                listOf(
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        true
+//                    ),
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        true
+//                    ),
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        true
+//                    ),
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        requested = true
+//                    )
+//                )
+//            ),
+//            // 3
+//            SelfSignature(
+//                listOf(
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        true
+//                    ),
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        true
+//                    ),
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        requested = true
+//                    ),
+//                    SignatureList(
+//                        "Test Aja",
+//                        "31/12/2022",
+//                        "12345678",
+//                        "Test aja udah ini buat deskripsi dokumen tanda tangan",
+//                        requested = true
+//                    )
+//                )
+//            )
+        )
+    }
+
     fun loadFastRequest(): List<User> {
         return listOf<User>(
             User(R.drawable.avatar, name = "Ahmad Bani Faqih"),
@@ -208,27 +231,27 @@ class DataSource() {
         )
     }
 
-    fun loadListSignature(): List<SiganatureList> {
-        return listOf<SiganatureList>(
-            SiganatureList(
+    fun loadListSignature(): List<SignatureList> {
+        return listOf<SignatureList>(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",
                 "Test aja udah ini buat deskripsi dokumen tanda tangan"
             ),
-            SiganatureList(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",
                 "Test aja udah ini buat deskripsi dokumen tanda tangan"
             ),
-            SiganatureList(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",
                 "Test aja udah ini buat deskripsi dokumen tanda tangan"
             ),
-            SiganatureList(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",

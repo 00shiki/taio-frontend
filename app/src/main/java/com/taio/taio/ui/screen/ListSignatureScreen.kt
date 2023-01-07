@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.taio.taio.data.DataSource
 import com.taio.taio.R
-import com.taio.taio.domain.model.SiganatureList
+import com.taio.taio.domain.model.SignatureList
 import com.taio.taio.ui.TandatanganioScreen
 import com.taio.taio.ui.theme.*
 
@@ -86,7 +86,7 @@ fun BannerCreate(navController: NavController){
 }
 
 @Composable
-fun ListSignature(siganatureList: List<SiganatureList>){
+fun ListSignature(signatureList: List<SignatureList>){
     LazyColumn(modifier = Modifier.padding(horizontal = 16.dp)) {
         item{
             Text(
@@ -95,14 +95,14 @@ fun ListSignature(siganatureList: List<SiganatureList>){
                 color = Color.Black,
             )
         }
-        items(items = siganatureList) { request ->
-            ShapeListSignature(siganatureList = request)
+        items(items = signatureList) { request ->
+            ShapeListSignature(signatureList = request)
         }
     }
 }
 
 @Composable
-fun ShapeListSignature(siganatureList: SiganatureList, modifier: Modifier = Modifier) {
+fun ShapeListSignature(signatureList: SignatureList, modifier: Modifier = Modifier) {
     Card(
         shape = RoundedCornerShape(12.dp),
         elevation = 2.dp,
@@ -118,17 +118,17 @@ fun ShapeListSignature(siganatureList: SiganatureList, modifier: Modifier = Modi
                     .padding(start = 15.dp)
             ) {
                 Text(
-                    text = siganatureList.documentName,
+                    text = signatureList.documentName,
                     style = Typography.h6
                 )
                 Text(
-                    text = siganatureList.documentDate,
+                    text = signatureList.documentDate,
                     style = Typography.body2,
                     color = Gray700,
                     modifier = modifier.padding(PaddingValues(top = 5.dp))
                 )
                 Text(
-                    text = siganatureList.documentDescription,
+                    text = signatureList.documentDescription,
                     style = Typography.body2,
                     color = Gray700,
                     modifier = modifier.padding(PaddingValues(top = 5.dp))

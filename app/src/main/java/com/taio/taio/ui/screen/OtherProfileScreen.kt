@@ -1,6 +1,5 @@
 package com.taio.taio.ui.screen
 
-import android.util.Log
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
@@ -9,7 +8,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -23,13 +21,22 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.taio.taio.R
+import com.taio.taio.domain.model.RequestedSignature
+import com.taio.taio.domain.model.SelfSignature
 import com.taio.taio.domain.model.User
+import com.taio.taio.domain.model.UserSocial
 import com.taio.taio.ui.theme.*
 import com.taio.taio.viewmodel.SearchViewModel
 
 @Composable
 fun OtherProfileScreen(
     user: User,
+    userSocial: UserSocial = UserSocial(),
+    selfSignature: SelfSignature = SelfSignature(),
+    requestedSignature: RequestedSignature = RequestedSignature(),
+//    userSocial: UserSocial,
+//    selfSignature: SelfSignature,
+//    requestedSignature: RequestedSignature,
     navController: NavHostController,
     searchViewModel: SearchViewModel = viewModel()
 ){
@@ -171,7 +178,7 @@ fun OtherProfileScreen(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Text(
-                        text = user.follower.size.toString(),
+                        text = userSocial.follower.size.toString(),
                         modifier = Modifier
                             .align(alignment = Alignment.CenterHorizontally),
                         style = Typography.h1
@@ -199,7 +206,7 @@ fun OtherProfileScreen(
                     verticalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Text(
-                        text = user.following.size.toString(),
+                        text = userSocial.following.size.toString(),
                         modifier = Modifier
                             .align(alignment = Alignment.CenterHorizontally),
                         style = Typography.h1
@@ -241,7 +248,7 @@ fun OtherProfileScreen(
                             .size(20.dp),
                     )
                     Text(
-                        text = stringResource(R.string.generate_count) + user.tergenerate.size.toString(),
+                        text = stringResource(R.string.generate_count) + selfSignature.tergenerate.size.toString(),
                         style = Typography.body2,
                         modifier = Modifier.padding(horizontal = 2.dp)
                     )
@@ -265,7 +272,7 @@ fun OtherProfileScreen(
                             .size(20.dp)
                     )
                     Text(
-                        text = stringResource(R.string.generate_self) + user.self.size.toString(),
+                        text = stringResource(R.string.generate_self) + selfSignature.self.size.toString(),
                         style = Typography.body2,
                         modifier = Modifier.padding(horizontal = 2.dp)
                     )
@@ -289,7 +296,7 @@ fun OtherProfileScreen(
                             .size(20.dp)
                     )
                     Text(
-                        text = stringResource(R.string.generate_request) + user.requested.size.toString(), //Number i variable
+                        text = stringResource(R.string.generate_request) + requestedSignature.requested.size.toString(), //Number i variable
                         style = Typography.body2,
                         modifier = Modifier.padding(horizontal = 2.dp)
                     )

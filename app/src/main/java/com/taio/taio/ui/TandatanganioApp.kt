@@ -2,7 +2,6 @@ package com.taio.taio.ui
 
 import EditProfileScreen
 import EmailCheckScreen
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -14,11 +13,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
@@ -30,9 +25,7 @@ import com.taio.taio.R
 import com.taio.taio.domain.model.User
 import com.taio.taio.ui.screen.*
 import com.taio.taio.ui.theme.Gray700
-import com.taio.taio.ui.theme.TandatanganioMobileTheme
 import com.taio.taio.ui.theme.Typography
-import com.taio.taio.viewmodel.SearchViewModel
 
 
 sealed class TandatanganioScreen(
@@ -137,7 +130,7 @@ fun TandatanganioNavGraph(navController: NavHostController) {
             RequestScreen(navController)
         }
         composable(route = TandatanganioScreen.Profile.route) {
-            ProfileScreen(mockUser, navController)
+            ProfileScreen(mockUser, navController =  navController)
         }
         composable(route = TandatanganioScreen.Login.route) {
             LoginScreen(navController)
