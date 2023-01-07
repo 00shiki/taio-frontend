@@ -1,7 +1,7 @@
 package com.taio.taio.data
 
 import com.taio.taio.R
-import com.taio.taio.domain.model.SiganatureList
+import com.taio.taio.domain.model.SignatureList
 import com.taio.taio.domain.model.User
 import com.taio.taio.domain.model.UserRequest
 import com.taio.taio.domain.model.UserRequested
@@ -27,28 +27,28 @@ class DataSource() {
                     User(R.drawable.avatar, name = "Ridwan Effendy")
                 ),
                 listOf(
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         requested = true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         requested = true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
@@ -74,28 +74,28 @@ class DataSource() {
                     User(R.drawable.avatar, name = "Ridwan Effendy")
                 ),
                 listOf(
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
@@ -121,28 +121,28 @@ class DataSource() {
                     User(R.drawable.avatar, name = "Ridwan Effendy")
                 ),
                 listOf(
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
                         "Test aja udah ini buat deskripsi dokumen tanda tangan",
                         requested = true
                     ),
-                    SiganatureList(
+                    SignatureList(
                         "Test Aja",
                         "31/12/2022",
                         "12345678",
@@ -208,27 +208,27 @@ class DataSource() {
         )
     }
 
-    fun loadListSignature(): List<SiganatureList> {
-        return listOf<SiganatureList>(
-            SiganatureList(
+    fun loadListSignature(): List<SignatureList> {
+        return listOf<SignatureList>(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",
                 "Test aja udah ini buat deskripsi dokumen tanda tangan"
             ),
-            SiganatureList(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",
                 "Test aja udah ini buat deskripsi dokumen tanda tangan"
             ),
-            SiganatureList(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",
                 "Test aja udah ini buat deskripsi dokumen tanda tangan"
             ),
-            SiganatureList(
+            SignatureList(
                 "Test Aja",
                 "31/12/2022",
                 "12345678",

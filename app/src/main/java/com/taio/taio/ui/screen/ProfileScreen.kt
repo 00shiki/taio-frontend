@@ -19,7 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.taio.taio.R
+import com.taio.taio.domain.model.RequestedSignature
+import com.taio.taio.domain.model.SelfSignature
 import com.taio.taio.domain.model.User
+import com.taio.taio.domain.model.UserSocial
 import com.taio.taio.ui.TandatanganioScreen
 import com.taio.taio.ui.theme.Gray700
 import com.taio.taio.ui.theme.TandatanganioMobileTheme
@@ -28,6 +31,9 @@ import com.taio.taio.ui.theme.Typography
 @Composable
 fun ProfileScreen(
     user: User,
+    userSocial: UserSocial,
+    selfSignature: SelfSignature,
+    requestedSignature: RequestedSignature,
     navController: NavHostController
 ) {
     Column(
@@ -97,7 +103,7 @@ fun ProfileScreen(
                     .border(BorderStroke(1.dp, Color.LightGray))
             ) {
                 Text(
-                    text = user.follower.size.toString(),
+                    text = userSocial.follower.size.toString(),
                     modifier = Modifier
                         .align(alignment = Alignment.CenterHorizontally),
                     style = Typography.h1
@@ -124,7 +130,7 @@ fun ProfileScreen(
                     .border(BorderStroke(1.dp, Color.LightGray))
             ) {
                 Text(
-                    text = user.following.size.toString(),
+                    text = userSocial.following.size.toString(),
                     modifier = Modifier
                         .align(alignment = Alignment.CenterHorizontally),
                     style = Typography.h1
@@ -166,7 +172,7 @@ fun ProfileScreen(
                         .size(20.dp),
                 )
                 Text(
-                    text = stringResource(R.string.generate_count) + user.tergenerate.size.toString(),
+                    text = stringResource(R.string.generate_count) + selfSignature.tergenerate.size.toString(),
                     style = Typography.body2,
                     modifier = Modifier.padding(horizontal = 2.dp)
                 )
@@ -190,7 +196,7 @@ fun ProfileScreen(
                         .size(20.dp)
                 )
                 Text(
-                    text = stringResource(R.string.generate_self) + user.self.size.toString(),
+                    text = stringResource(R.string.generate_self) + selfSignature.self.size.toString(),
                     style = Typography.body2,
                     modifier = Modifier.padding(horizontal = 2.dp)
                 )
@@ -214,7 +220,7 @@ fun ProfileScreen(
                         .size(20.dp)
                 )
                 Text(
-                    text = stringResource(R.string.generate_request) + user.requested.size.toString(),
+                    text = stringResource(R.string.generate_request) + requestedSignature.requested.size.toString(),
                     style = Typography.body2,
                     modifier = Modifier.padding(horizontal = 2.dp)
                 )
