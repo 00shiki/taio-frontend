@@ -91,12 +91,6 @@ fun CreateSignatureScreen(navController: NavController, viewModel: CreateSignatu
                 page = page,
                 focusManager = focusManager,
             )
-            else -> PageThree(
-                viewModel = viewModel,
-                createState = createState,
-                page = page,
-                focusManager = focusManager,
-            )
         }
     }
 }
@@ -236,77 +230,6 @@ fun PageTwo(
             }
         }
         Spacer(modifier = Modifier.size(16.dp))
-        
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.generated_count),
-                contentDescription = null,
-                tint = Green500,
-                modifier = Modifier.padding(end = 15.dp)
-            )
-            Text(
-                text = "Live Signature",
-                fontSize = 15.sp,
-                color = Color.Black
-            )
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Text(
-                text = "Apakah anda ingin menggunkan live signature ?",
-                style = Typography.body1,
-                color = Gray500
-            )
-            Row(
-                modifier = Modifier.padding(start = 130.dp, top = 10.dp, bottom = 10.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    modifier = Modifier
-                        .clickable {page.value = 3}
-                        .padding(end = 10.dp),
-                    text = "Iya",
-                    fontSize = 15.sp,
-                    color = Green500
-                )
-                Text(
-                    modifier = Modifier.clickable { },
-                    text = "Tidak",
-                    fontSize = 15.sp,
-                    color = Gray500
-                )
-            }
-        }
-        Spacer(modifier = Modifier.size(16.dp))
-        
-        Text(
-            text = "Signature Preview",
-            fontSize = 15.sp,
-            color = Color.Black
-        )
-        Text(
-            text = "Signature preview akan terlihat jika anda melakukan live signature",
-            style = Typography.body1,
-            color = Gray500
-        )
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .height(220.dp)
-            .border(2.dp, Green500, RoundedCornerShape(10.dp))) {
-            Text(
-                modifier = Modifier.padding(start = 50.dp, top = 80.dp),
-                text = "Nanti Taruh Image Disini Ya Ky",
-                fontSize = 15.sp
-            )
-        }
-        Spacer(modifier = Modifier.size(16.dp))
-
         ButtonFooter(
             label = "Simpan",
             onButtonClick = {
@@ -318,28 +241,6 @@ fun PageTwo(
     }
 }
 
-@Composable
-fun PageThree(
-    viewModel: CreateSignatureViewModel,
-    createState: CreateState,
-    page: MutableState<Int>,
-    focusManager: FocusManager
-){
-    Column{
-        SignatureGuide()
-        SignatureCanvas()
-        SignatureGuide2()
-        ButtonFooter(
-            label = "Simpan",
-            onButtonClick = {
-                page.value = 2
-            }
-        )
-        ButtonFooterWhite(
-            label = "Kembali",
-            onButtonClick = {page.value = 2})
-    }
-}
 
 @Composable
 fun ButtonFooter(
@@ -455,127 +356,6 @@ fun LargeTextField(
         )
 
     )
-}
-@Composable
-fun SignatureGuide(){
-    Column(modifier = Modifier
-        .padding(16.dp)
-    ) {
-        Row{
-            Image(painter = painterResource(R.drawable.generated_count),
-                contentDescription = "logo Signature",
-                modifier = Modifier.padding(5.dp))
-            Text(text ="Live Signature",
-                style = TextStyle(
-                    fontSize=12.sp
-                ),modifier = Modifier.padding(5.dp))
-        }
-        Spacer(modifier = Modifier.size(40.dp))
-        Text(text= "Untuk buat tanda tangan gunakan kotak yang telah disediakan",
-            style = TextStyle(
-                fontSize=12.sp, textAlign = TextAlign.Center
-            ))
-    }
-
-}
-
-@Composable
-fun SignatureCanvas(){
-    val undoVisibility = remember {mutableStateOf(false)}
-    val redoVisibility = remember {mutableStateOf(false)}
-    val drawController = rememberDrawController()
-
-    Column(modifier = Modifier
-        .padding(16.dp)
-        .height(295.dp)
-        .border(2.dp, Green200)) {
-        drawController.setStrokeColor(Black)
-        DrawBox(drawController = drawController,
-            modifier = Modifier
-                .weight(1f, true)
-                .fillMaxSize()
-        ) {
-                undoCount, redoCount ->
-            undoVisibility.value = undoCount !=0
-            redoVisibility.value = redoCount !=0
-        }
-        ControlsBar(drawController = drawController,
-            undoVisibility = undoVisibility,
-            redoVisibility = redoVisibility )
-    }
-}
-
-
-@Composable
-fun RowScope.MenuItems(
-    @DrawableRes resId: Int,
-    desc: String,
-    colorTint: androidx.compose.ui.graphics.Color,
-    border: Boolean = false,
-    onClick: () -> Unit
-) {
-    val modifier = Modifier.size(24.dp)
-    IconButton(onClick = onClick, modifier = Modifier.weight(1f, true)) {
-        Icon(
-            painterResource(id = resId),
-            contentDescription = desc,
-            tint = colorTint,
-            modifier = if(border) modifier.border(
-                0.5.dp,
-                White,
-                shape = CircleShape
-            ) else modifier
-        )
-
-    }
-}
-
-
-@Composable
-fun ControlsBar(
-    drawController: DrawController,
-    undoVisibility: MutableState<Boolean>,
-    redoVisibility: MutableState<Boolean>,
-){
-    Row(
-        modifier = Modifier
-            .padding(12.dp),
-        horizontalArrangement = Arrangement.SpaceAround
-    ){
-        MenuItems(
-            R.drawable.ic_baseline_undo_24,
-            "undo",
-            if (undoVisibility.value) MaterialTheme.colors.primary else MaterialTheme.colors.primaryVariant
-        )   {
-            if(undoVisibility.value) drawController.unDo()
-        }
-        MenuItems(
-            resId = R.drawable.ic_baseline_redo_24,
-            desc = "redo",
-            colorTint =if (redoVisibility.value) MaterialTheme.colors.primary else MaterialTheme.colors.primaryVariant
-        ) {
-            if (redoVisibility.value) drawController.reDo()
-        }
-        MenuItems(
-            R.drawable.ic_baseline_reset_24,
-            "reset",
-            if(redoVisibility.value || undoVisibility.value) MaterialTheme.colors.primary else MaterialTheme.colors.primaryVariant
-        ){
-            drawController.reset()
-        }
-    }
-}
-
-
-@Composable
-fun SignatureGuide2(){
-    Text(text = "Hasil tanda tangan dapat dilihat pada signature, harap simpan terlebih dahulu tanda tangan yang telah dibuat",
-        style = TextStyle(
-            fontSize=12.sp,
-            color = Gray,
-            textAlign = TextAlign.Center
-        ),
-        modifier = Modifier.padding(10.dp))
 }
 
 
